@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const Question = require('./models/Question');
 
-const port = config.get('port');
+const port = process.env.PORT || 5000;
 const mongodbUri = config.get('mongodbUri');
 
 app.use(express.urlencoded({ extended: true }));
