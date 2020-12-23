@@ -20,6 +20,10 @@ async function start() {
         app.listen(port, () => {
             console.log(`App started on port ${port} ...`)
 
+            app.get(`/`, (req, res) => {
+                res.send(`This is basic API application for alexdev0ver site.`)
+            })
+
             app.get('/questions', async (req, res) => {
                 const questions = await Question.find();
                 res.send(questions);
