@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -7,8 +6,11 @@ const Question = require('./models/Question');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
-app.options(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use((req, res) => {
+    express.urlencoded({ extended: true});
+    res.header("Access-Control-Allow-Origin");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+})
 
 async function start() {
     try {
