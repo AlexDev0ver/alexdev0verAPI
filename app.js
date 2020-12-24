@@ -6,10 +6,11 @@ const Question = require('./models/Question');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
-app.use((req, res) => {
+app.use((req, res, next) => {
     express.urlencoded({ extended: true});
     res.header("Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 })
 
 async function start() {
