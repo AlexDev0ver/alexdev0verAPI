@@ -1,11 +1,13 @@
 const express = require('express');
-const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 
+const app = express();
 const Question = require('./models/Question');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
+app.options(cors());
 app.use(express.urlencoded({ extended: true }));
 
 async function start() {
@@ -24,7 +26,7 @@ async function start() {
 
             app.get('/questions', async (req, res) => {
                 const questions = await Question.find();
-                res.send(questions);
+                res.send(200, questions);
             });
 
             app.post(`/ask`, async (req, res) => {
