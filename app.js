@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
     express.urlencoded({ extended: true});
-    res.header("Access-Control-Allow-Origin");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 })
@@ -29,7 +29,7 @@ async function start() {
 
             app.get('/questions', async (req, res) => {
                 const questions = await Question.find();
-                res.send(200, questions);
+                res.json(questions);
             });
 
             app.post(`/ask`, async (req, res) => {
