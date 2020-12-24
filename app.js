@@ -2,11 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-const config = require('config');
 const Question = require('./models/Question');
-
+const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
-const mongodbUri = config.get('mongodbUri');
 
 app.use(express.urlencoded({ extended: true }));
 
