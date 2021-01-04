@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 
-const Question = require('../models/Question');
-const AskedQuestion = require('../models/AskedQuestion');
+const Question = require('./models/Question');
+const AskedQuestion = require('./models/AskedQuestion');
 
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
