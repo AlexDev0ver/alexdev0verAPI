@@ -7,14 +7,15 @@ const questions = require('./routes/questions');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
-app.use((req, res, next) => {
-    express.urlencoded({ extended: true});
-    next();
-})
-
-app.use('/questions', questions);
-
 async function start() {
+
+    app.use((req, res, next) => {
+        express.urlencoded({ extended: true});
+        next();
+    })
+
+    app.use('/questions', questions);
+
     try {
         await mongoose.connect(mongodbUri, {
             useNewUrlParser: true,
