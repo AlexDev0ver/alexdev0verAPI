@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const Question = require('./models/Question');
+const AskedQuestion = require('./models/AskedQuestion');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
@@ -33,13 +34,12 @@ async function start() {
             });
 
             app.post(`/ask`, async (req, res) => {
-                const question = new Question({
-                    question: req.body.question,
-                    answer: "Answer for that will be added soon"
+                const question = new AskedQuestion({
+                    question: req.body.question
                 })
 
                 await question.save();
-                res.send(201, "Question was created! Alex will see it soon.")
+                res.json("Question was created! Alex will see it soon.")
             })
         });
     }
