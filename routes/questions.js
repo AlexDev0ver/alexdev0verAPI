@@ -7,7 +7,7 @@ const AskedQuestion = require('../models/AskedQuestion');
 
 
 router.use((req, res, next) => {
-  cors({"Access-Control-Allow-Origin": "*"});
+  cors();
   next();
 });
 
