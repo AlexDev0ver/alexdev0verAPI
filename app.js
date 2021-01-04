@@ -9,9 +9,10 @@ const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
     express.urlencoded({ extended: true});
-    cors();
     next();
 })
+
+app.use('/questions', questions);
 
 async function start() {
     try {
@@ -26,8 +27,6 @@ async function start() {
             app.get(`/`, (req, res) => {
                 res.send(`This is basic API application for alexdev0ver site.`)
             })
-
-            app.use('/questions', questions)
         });
     }
 
