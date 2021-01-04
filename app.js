@@ -11,11 +11,8 @@ const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true}));
 
-app.use((req, res, next) => {
-    express.urlencoded({ extended: true});
-    next();
-})
 
 async function start() {
 
