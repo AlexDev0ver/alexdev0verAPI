@@ -2,14 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
-const Question = require('./models/Question');
-const AskedQuestion = require('./models/AskedQuestion');
+const cors = require('cors');
 const questions = require('./routes/questions');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
     express.urlencoded({ extended: true});
+    cors();
     next();
 })
 
