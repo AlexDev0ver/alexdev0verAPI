@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));
-app.use(express.bodyParser());
+app.use(bodyParser());
 
 
 async function start() {
