@@ -10,14 +10,14 @@ const AskedQuestion = require('./models/AskedQuestion');
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
 
+app.use(cors());
+
+app.use((req, res, next) => {
+    express.urlencoded({ extended: true});
+    next();
+})
+
 async function start() {
-
-    app.use((req, res, next) => {
-        express.urlencoded({ extended: true});
-        cors();
-        next();
-    })
-
 
     try {
         await mongoose.connect(mongodbUri, {
