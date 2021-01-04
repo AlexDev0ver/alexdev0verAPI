@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 app.use((req, res, next) => {
     express.urlencoded({ extended: true});
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 })
@@ -39,7 +40,7 @@ async function start() {
                 })
 
                 await question.save();
-                res.json("Question was created! Alex will see it soon.")
+                res.status(201).json({ message: 'Thank you for asking. Alex will see your question soon.'})
             })
         });
     }
