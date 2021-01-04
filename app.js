@@ -33,7 +33,7 @@ async function start() {
                 res.json(questions);
             });
 
-            app.post(`/ask`, async (req, res) => {
+            app.post(`/questions`, async (req, res) => {
                 const question = new AskedQuestion({
                     question: req.body.question
                 })
