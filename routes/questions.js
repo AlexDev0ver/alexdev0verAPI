@@ -7,7 +7,7 @@ const AskedQuestion = require('../models/AskedQuestion');
 
 
 router.use((req, res, next) => {
-  cors();
+  cors({"Access-Control-Allow-Origin": "*"});
   next();
 });
 
@@ -16,7 +16,7 @@ router.get('/questions', async (req, res) => {
     res.json(questions);
 });
 
-router.post(`/questions`, cors({"Access-Control-Allow-Origin": "*"}), async (req, res) => {
+router.post(`/questions`, async (req, res) => {
     const question = new AskedQuestion({
         question: req.body.question
     })
