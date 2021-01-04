@@ -16,7 +16,7 @@ router.get('/questions', async (req, res) => {
     res.json(questions);
 });
 
-router.post(`/questions`, async (req, res) => {
+router.post(`/questions`, cors({"Access-Control-Allow-Origin": "*"}), async (req, res) => {
     const question = new AskedQuestion({
         question: req.body.question
     })
