@@ -59,7 +59,7 @@ async function start() {
                         from: email,
                         to: 'salaris9315@gmail.com',
                         subject: 'New question from alexdev0ver.io',
-                        text: res.body.question
+                        text: req.body.question
                     };
 
                     transporter.sendMail(mailOptions, (error, info) => {
