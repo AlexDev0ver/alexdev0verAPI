@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const nodemailer = require('nodemailer');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -43,6 +43,26 @@ async function start() {
                 })
 
                 await question.save();
+
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.email,
+                        pass: process.env.pass
+                    }
+                });
+
+                const mailOptions = {
+                    from: propcess.env.email,
+                    to: 'salaris9315@gmail.com',
+                    subject: 'New question from alexdev0ver.io',
+                    text: res.body.question
+                };
+
+                transporter.sendMail(mailOptions, (error, info) => {
+                    error ? console.log(error) : console.log(`Email send: ${info.response}`)
+                });
+
                 res.json({ message: 'Thank you for asking. Alex will see your question soon.'})
             })
         });
