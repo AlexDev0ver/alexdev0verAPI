@@ -10,6 +10,8 @@ const AskedQuestion = require('./models/AskedQuestion');
 
 const mongodbUri = process.env.mongodbUri;
 const port = process.env.PORT || 5000;
+const email = process.env.email;
+const pass = process.env.pass;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));
@@ -38,32 +40,38 @@ async function start() {
             });
 
             app.post(`/questions`, async (req, res) => {
-                const question = new AskedQuestion({
-                    question: req.body.question
-                })
+                try {
+                    const question = new AskedQuestion({
+                        question: req.body.question
+                    })
 
-                await question.save();
+                    await question.save();
 
-                const transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                        user: process.env.email,
-                        pass: process.env.pass
-                    }
-                });
+                    const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: email,
+                            pass: pass
+                        }
+                    });
 
-                const mailOptions = {
-                    from: propcess.env.email,
-                    to: 'salaris9315@gmail.com',
-                    subject: 'New question from alexdev0ver.io',
-                    text: res.body.question
-                };
+                    const mailOptions = {
+                        from: email,
+                        to: 'salaris9315@gmail.com',
+                        subject: 'New question from alexdev0ver.io',
+                        text: res.body.question
+                    };
 
-                transporter.sendMail(mailOptions, (error, info) => {
-                    error ? console.log(error) : console.log(`Email send: ${info.response}`)
-                });
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        error ? console.log(error) : console.log(`Email send: ${info.response}`)
+                    });
 
-                res.json({ message: 'Thank you for asking. Alex will see your question soon.'})
+                    res.json({ message: 'Thank you for asking. Alex will see your question soon.'})
+
+                } catch (err) {
+                    console.log(err);
+                    res.json ({ message: 'Sorry, something go wrong. Alex will fix it soon.' })
+                }
             })
         });
     }
